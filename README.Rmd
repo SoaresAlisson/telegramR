@@ -1,0 +1,29 @@
+---
+title: "TelegramR - vignette"
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# telegramR
+
+<!-- badges: start -->
+
+![R package](https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white)
+
+<!-- badges: end -->
+
+<!-- You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. -->
+<!-- In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN. -->
+
+```{r child=("~/Documentos/Programação/R/telegramR/vignettes/vignette-TelegramR.Rmd"), eval=TRUE}
+```

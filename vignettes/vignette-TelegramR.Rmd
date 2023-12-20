@@ -1,0 +1,69 @@
+---
+title: "TelegramR - vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vignette-TelegramR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  cache = TRUE,
+  comment = "#>"
+)
+```
+
+telegramR is a package to deal with exported chats from [Telegram messenger](https://www.telegram.org/).
+Telegram desktop allows the user to export the data of chats and channels, but how to extract ant treat those data remains a question.
+This package allows the transformation of HTML from exported chats/channels in tibble/dataframe, as well as have some functions to a brief summary about the exported chats. 
+
+To install this package using devtools
+
+``` r
+# installing devtools
+install.packages("devtools")
+# installing telegramR
+devtools::install_github("telegramR")
+```
+
+To load the package:
+
+```{r library}
+library(telegramR)
+```
+
+
+```{r, echo=FALSE, eval=FALSE}
+
+```
+
+To transform the .HTML file into dataframe, use the function `html2df()`
+
+```{r}
+html2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/messages.html")
+```
+
+To get all messages from a folder and transform all in one single tibble:
+
+```{r}
+dir2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/")
+```
+
+The function has the parameter `recursive = TRUE` as default, so it is possible to recursively find HTML files in folders inside another folders.
+
+```{r}
+dir2df("~/Downloads/Telegram Desktop/")
+```
+
+
+## Organizing the exported chats/ channels.
+
+Telegram Desktop allows the user to export channel/chats with specific date ranges.
+If you exports a lot of telegram channels/chats, the probability to become lost are high. This confusion may happens because there is a lot of  groups/channels, or because the same channel was exported several times with different date ranges. To organize it, the function `tm_info()` (telegram information) returns the name of channel/chat, the first and the last dates in each HTML file
+
+```{r}
+tm_info("~/Downloads/Telegram Desktop/")
+```
+
