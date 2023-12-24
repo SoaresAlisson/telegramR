@@ -51,3 +51,15 @@ DF <- tibble::tibble()
 		return(DF)
 }
 
+
+#' filter dataframe to show only the last exports of each chat/group
+#'
+#' @param DF the tibble/dataframe generated with `tm_info()` function
+#'
+#' @export
+#' @examples
+#' tm_info("~/Downloads/Telegram Desktop/") |> filter_last_export()
+filter_last_export <- function(DF){
+  DF |> dplyr::group_by(name) |>
+    dplyr::summarise(LastDate = max(LastDate))
+}

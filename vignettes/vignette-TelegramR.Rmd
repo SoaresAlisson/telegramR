@@ -15,21 +15,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-telegramR is a package to deal with exported chats from [Telegram messenger](https://www.telegram.org/).
+The telegramR package deals with exported chats from [Telegram messenger](https://www.telegram.org/).
 Telegram desktop allows the user to export the data of chats and channels, but how to extract ant treat those data remains a question.
 This package allows the transformation of HTML from exported chats/channels in tibble/dataframe, as well as have some functions to a brief summary about the exported chats. 
 
-## installation: option 1 with devtools package
+## Installation: Option 1 with devtools package
 To install this package using devtools
 
 ``` r
 # installing devtools
 install.packages("devtools")
 # installing telegramR
-devtools::install_github("telegramR")
+devtools::install_github("SoaresAlisson/telegramR")
 ```
 
-## installation: option 2 with remotes package
+## Installation: Option 2 with remotes package
 
 ```r
 # if remote package is installed, load it; If not, install
@@ -37,13 +37,13 @@ if (!require('remotes')) install.packages('remotes')
 remotes::install_github('SoaresAlisson/telegramR')
 ```
 
-## installation: option 3 download the files e build it locally
+## Installation: Option 3 download the files and build it locally
 
 You go to Github, click on green bottom `<> code`, than in `Download Zip`, unzip it, open the .Rproj in Rstudio. Once the project is loaded, you can build the package: option1) press ctrl+shift+b, or 2) go to Build/Install Package
 
 ## Running the package
 
-To load the package:
+Once installed, to load the package:
 
 ```{r library}
 library(telegramR)
@@ -54,7 +54,7 @@ library(telegramR)
 
 ```
 
-To transform the .HTML file into dataframe, use the function `html2df()`
+To transform one .HTML file into tibble/dataframe, use the function `html2df("html_file")`
 
 ```{r}
 html2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/messages.html")
@@ -79,6 +79,13 @@ Telegram Desktop allows the user to export channel/chats with specific date rang
 If you exports a lot of telegram channels/chats, the probability to become lost are high. This confusion may happens because there is a lot of  groups/channels, or because the same channel was exported several times with different date ranges. To organize it, the function `tm_info()` (telegram information) returns the name of channel/chat, the first and the last dates in each HTML file
 
 ```{r}
-tm_info("~/Downloads/Telegram Desktop/")
+info_all_tm_chats <- tm_info("~/Downloads/Telegram Desktop/")
+info_all_tm_chats
+```
+
+In this way, if you want to export again the same chat, it is easy to know the last date of the last export. To make it even easier:
+
+```{r}
+filter_last_export(info_all_tm_chats)
 ```
 

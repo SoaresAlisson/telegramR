@@ -18,12 +18,14 @@ alt="R package" />
 <!-- You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. -->
 <!-- In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN. -->
 
-telegramR is a package to deal with exported chats from [Telegram
+The telegramR package deals with exported chats from [Telegram
 messenger](https://www.telegram.org/). Telegram desktop allows the user
 to export the data of chats and channels, but how to extract ant treat
 those data remains a question. This package allows the transformation of
 HTML from exported chats/channels in tibble/dataframe, as well as have
 some functions to a brief summary about the exported chats.
+
+## Installation: Option 1 with devtools package
 
 To install this package using devtools
 
@@ -31,16 +33,34 @@ To install this package using devtools
 # installing devtools
 install.packages("devtools")
 # installing telegramR
-devtools::install_github("telegramR")
+devtools::install_github("SoaresAlisson/telegramR")
 ```
 
-To load the package:
+## Installation: Option 2 with remotes package
+
+``` r
+# if remote package is installed, load it; If not, install
+if (!require('remotes')) install.packages('remotes')
+remotes::install_github('SoaresAlisson/telegramR')
+```
+
+## Installation: Option 3 download the files and build it locally
+
+You go to Github, click on green bottom `<> code`, than in
+`Download Zip`, unzip it, open the .Rproj in Rstudio. Once the project
+is loaded, you can build the package: option1) press ctrl+shift+b, or 2)
+go to Build/Install Package
+
+## Running the package
+
+Once installed, to load the package:
 
 ``` r
 library(telegramR)
 ```
 
-To transform the .HTML file into dataframe, use the function `html2df()`
+To transform one .HTML file into tibble/dataframe, use the function
+`html2df("html_file")`
 
 ``` r
 html2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/messages.html")
@@ -60,8 +80,8 @@ html2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/messages.html")
 #> # ℹ 989 more rows
 ```
 
-To get all messages from a folder and transform all in one single
-tibble:
+To get all messages from HTML in a folder and transform all in one
+single tibble:
 
 ``` r
 dir2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/")
@@ -83,7 +103,7 @@ dir2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/")
 
 The function has the parameter `recursive = TRUE` as default, so it is
 possible to recursively find HTML files in folders inside another
-folders.
+folders. If you don’t want it, use the parameter `recursive = FALSE`
 
 ``` r
 dir2df("~/Downloads/Telegram Desktop/")
@@ -114,7 +134,8 @@ function `tm_info()` (telegram information) returns the name of
 channel/chat, the first and the last dates in each HTML file
 
 ``` r
-tm_info("~/Downloads/Telegram Desktop/")
+info_all_tm_chats <- tm_info("~/Downloads/Telegram Desktop/")
+info_all_tm_chats
 #> # A tibble: 209 × 5
 #>    HTMLName                                 name  UserPics FirstDate  LastDate  
 #>    <chr>                                    <chr> <chr>    <date>     <date>    
@@ -129,4 +150,16 @@ tm_info("~/Downloads/Telegram Desktop/")
 #>  9 ~/Downloads/Telegram Desktop/ChatExport… Hack… ""       2017-05-23 2017-06-10
 #> 10 ~/Downloads/Telegram Desktop/ChatExport… Hack… ""       2017-06-10 2017-06-27
 #> # ℹ 199 more rows
+```
+
+In this way, if you want to export again the same chat, it is easy to
+know the last date of the last export. To make it even easier:
+
+``` r
+filter_last_export(info_all_tm_chats)
+#> # A tibble: 2 × 2
+#>   name                             LastDate  
+#>   <chr>                            <date>    
+#> 1 Hacker News                      2023-12-16
+#> 2 Science News Facts Updates Daily 2023-12-19
 ```
