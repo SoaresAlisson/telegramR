@@ -1,0 +1,113 @@
+---
+title: "telegramR"
+author: "alisson soares"
+date: "2023-12-16"
+output:
+  html_document: default
+pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r, build pacote}
+# update a documentacao. 		- irá reconstruir NAMESPACE:
+devtools::document() # rebuild docs and NAMESPACE
+```
+
+binary = FALSE this creates a tar.gz package that can be installed on any platform, provided they have a full development environment (although packages without source code can typically be installed out of the box).
+If binary = TRUE, the package will have a platform specific extension (e.g. .zip for windows), and will only be installable on the current platform, but no development environment is needed.
+
+```{r, build pacote}
+# no console
+# R CMD build senadoBrScraper
+# ou
+# devtools::build()
+devtools::build(binary = FALSE)
+Sys.time()
+```
+
+```{r, build pacote}
+# Load complete package
+devtools::load_all()
+```
+
+```{r, build pacote}
+usethis::use_article()
+# Set up test infrastructure with
+usethis::use_testthat()
+# Create a test file with
+usethis::use_test("test_BRAParlSpeech")
+# devtools::spell_check()
+#☑ Write tests with test_that() and expect_().0
+#☑ Run all tests with test() and run tests for current file with
+devtools::test_active_file()
+
+warnings()
+```
+
+
+```{r}
+usethis::use_readme_rmd()
+# devtools::build_readme()
+```
+
+
+```{r build, echo=FALSE, eval=FALSE}
+devtools::build_readme()
+```
+
+
+```{r}
+devtools::spell_check()
+```
+
+
+```{r, build pacote}
+devtools::test()
+```
+
+
+```{r, build pacote}
+devtools::check()
+# 2 errors ✖ | 7 warnings ✖ | 3 notes ✖
+```
+
+
+```{r, build pacote}
+#usethis::use_ccby_license().
+#usethis:use_gpl_license(version = 3, include_future = TRUE)
+# usethis:use_mit_license(version = 3, include_future = TRUE)
+usethis::use_build_ignore("R/utils-pipe.R", escape = FALSE)
+```
+
+
+```{r, build pacote}
+#usethis::use_warnings()
+#(get_senate_links)
+```
+
+```{r}
+# usethis::use_import_from("magrittr", "%>%")
+# usethis::use_import_from("magrittr", "%$%")
+```
+
+
+```{r, build pacote}
+devtools::check(document = FALSE, args = c('--as-cran'))
+```
+
+
+https://github.com/MangoTheCat/goodpractice
+
+```{r}
+goodpractice::gp("telegramR")
+```
+
+
+```{r}
+usethis::use_vignette ("vignette-TelegramR") 
+```
+

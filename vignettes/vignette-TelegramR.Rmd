@@ -19,6 +19,7 @@ telegramR is a package to deal with exported chats from [Telegram messenger](htt
 Telegram desktop allows the user to export the data of chats and channels, but how to extract ant treat those data remains a question.
 This package allows the transformation of HTML from exported chats/channels in tibble/dataframe, as well as have some functions to a brief summary about the exported chats. 
 
+## installation: option 1 with devtools package
 To install this package using devtools
 
 ``` r
@@ -27,6 +28,20 @@ install.packages("devtools")
 # installing telegramR
 devtools::install_github("telegramR")
 ```
+
+## installation: option 2 with remotes package
+
+```r
+# if remote package is installed, load it; If not, install
+if (!require('remotes')) install.packages('remotes')
+remotes::install_github('SoaresAlisson/telegramR')
+```
+
+## installation: option 3 download the files e build it locally
+
+You go to Github, click on green bottom `<> code`, than in `Download Zip`, unzip it, open the .Rproj in Rstudio. Once the project is loaded, you can build the package: option1) press ctrl+shift+b, or 2) go to Build/Install Package
+
+## Running the package
 
 To load the package:
 
@@ -45,13 +60,13 @@ To transform the .HTML file into dataframe, use the function `html2df()`
 html2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/messages.html")
 ```
 
-To get all messages from a folder and transform all in one single tibble:
+To get all messages from HTML in a folder and transform all in one single tibble:
 
 ```{r}
 dir2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/")
 ```
 
-The function has the parameter `recursive = TRUE` as default, so it is possible to recursively find HTML files in folders inside another folders.
+The function has the parameter `recursive = TRUE` as default, so it is possible to recursively find HTML files in folders inside another folders. If you don't want it, use the parameter ` recursive = FALSE` 
 
 ```{r}
 dir2df("~/Downloads/Telegram Desktop/")
