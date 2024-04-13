@@ -1,7 +1,7 @@
 #' returns a dataframe with general info
 #'
 #' @details insert on folder with html from exported chats of telegram and recieve a dataframe with info such as first date and last date of each html
-#' @param file the folder where html exported from Telegram are located
+#' @param file CHAR. The folder where html exported from Telegram are located
 #' @examples
 #' get_data("~/Downloads/Telegram Desktop/ChatExport_2023-12-16/messages.html")
 #'

@@ -1,6 +1,6 @@
 Package: telegramR
 Type: Package
-Title: script to deal with exported chats/channels from Telegram
+Title: deal with exported chats/channels from Telegram
 Version: 0.1.0
 Depends: R (>= 4.1.0)
 Authors@R: 
@@ -17,7 +17,7 @@ Description:
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Collate:
     'imports.R'
     'telegramR-package.R'
@@ -26,7 +26,10 @@ Collate:
     'telegram2DF.R'
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Imports: 
     magrittr
+Config/testthat/edition: 3
+URL: https://soaresalisson.github.io/telegramR/

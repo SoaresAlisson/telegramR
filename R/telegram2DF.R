@@ -1,4 +1,4 @@
-#' convert the the HTML into tibble/dataframe
+#' convert the the HTML into a tibble/dataframe
 #'
 #' @details from html file of the exported chats of telegram, get a dataframe with chat name, message id, date time, user name, text and link to audio/video`
 #'
@@ -38,6 +38,13 @@ html2df <- function(html_file){
       user_name = post.nome,
       text = post.text,
       Audio_Video_image = post.audioVideoImg
+    ) |> dplyr::mutate(
+      Chat_Name = ChatName |> as.character(),
+      msg_Id = msgId |> as.character(),
+      date_time = post.dataHora,
+      user_name = post.nome |> as.character(),
+      text = post.text |> as.character(),
+      Audio_Video_image = post.audioVideoImg |> as.character()
     ) %>%
      #filter( is.na(user_name)) %>%
     return()
@@ -48,7 +55,6 @@ html2df <- function(html_file){
 #' read files from a path and converts all its HTML into one tibble
 #'
 #' @details given a folder, reads all the HTML files and returns a single tibble
-#'
 #' @param folder CHAR. The directory/folder/path to the HTML files
 #' @param recursive BOOL. Will the . Default = TRUE
 #' @export

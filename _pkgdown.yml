@@ -1,0 +1,21 @@
+url: https://soaresalisson.github.io/telegramR/
+template:
+  bootstrap: 5
+reference:
+- title: import .html content to R
+  desc: |
+    functions to import html content to R
+  contents:
+  - html2df
+  - dir2df
+- title: information about the chats/channles
+  desc: |
+    functions that returns information about the chats/channles
+  contents:
+  - tm_info
+  - get_data
+  - filter_last_export
+- title: internal usage only
+  contents:
+  - F
+  - gsub2

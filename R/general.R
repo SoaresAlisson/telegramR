@@ -1,8 +1,8 @@
-#' wrapper around glue::glue()
+#' Just a wrapper around glue::glue(), For Internal usage.
 #'
 F <- glue::glue
 
-#' wrapper around gsub()
+#' wrapper around gsub(). For Internal usage.
 #'
 #' @details
 #' A wrapper around gsub, in order to make it usable with native pipe `|>`
