@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
+See the [documantation page here](https://htmlpreview.github.io/?https://github.com/SoaresAlisson/telegramR/blob/main/docs/index.html)
 
 
 <!-- You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. -->

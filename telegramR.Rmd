@@ -39,7 +39,7 @@ usethis::use_article()
 # Set up test infrastructure with
 usethis::use_testthat()
 # Create a test file with
-usethis::use_test("test_BRAParlSpeech")
+usethis::use_test("teelgramR")
 # devtools::spell_check()
 #☑ Write tests with test_that() and expect_().0
 #☑ Run all tests with test() and run tests for current file with
@@ -109,5 +109,10 @@ goodpractice::gp("telegramR")
 
 ```{r}
 usethis::use_vignette ("vignette-TelegramR") 
+```
+
+```{r}
+usethis::use_pkgdown(config_file = "_pkgdown.yml", destdir = "docs")
+usethis::use_pkgdown_github_pages()
 ```
 

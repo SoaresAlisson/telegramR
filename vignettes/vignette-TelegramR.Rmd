@@ -2,7 +2,7 @@
 title: "TelegramR - vignette"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vignette-TelegramR}
+  %\VignetteIndexEntry{TelegramR - vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,19 +17,20 @@ knitr::opts_chunk$set(
 
 The telegramR package deals with exported chats from [Telegram messenger](https://www.telegram.org/).
 Telegram desktop allows the user to export the data of chats and channels, but how to extract ant treat those data remains a question.
-This package allows the transformation of HTML from exported chats/channels in tibble/dataframe, as well as have some functions to a brief summary about the exported chats. 
+This package allows the transformation of .HTML from exported chats/channels in tibble/dataframe, as well as have some functions to a brief summary about the exported chats. 
+Check the [website](https://soaresalisson.github.io/telegramR/) or the [Github](https://github.com/SoaresAlisson/telegramR/)  of the project.
 
-## Installation: Option 1 with devtools package
+## Installation: Option 1 with {devtools} package
 To install this package using devtools
 
-``` r
+```r
 # installing devtools
 install.packages("devtools")
 # installing telegramR
 devtools::install_github("SoaresAlisson/telegramR")
 ```
 
-## Installation: Option 2 with remotes package
+## Installation: Option 2 with {remotes} package
 
 ```r
 # if remote package is installed, load it; If not, install
@@ -49,27 +50,45 @@ Once installed, to load the package:
 library(telegramR)
 ```
 
+You will need to have exported data from Telegram. Generally, it is at "Downloads/Telegram Desktop/"
 
-```{r, echo=FALSE, eval=FALSE}
 
-```
 
 To transform one .HTML file into tibble/dataframe, use the function `html2df("html_file")`
 
-```{r}
-html2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/messages.html")
+```{r, eval=FALSE}
+# html2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/messages.html")
+html2df("../data/ChatExport_2023-03-17/messages.html" ) 
 ```
 
-To get all messages from HTML in a folder and transform all in one single tibble:
-
-```{r}
-dir2df("~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)/")
+```{r, echo=FALSE, eval=TRUE}
+chatExport <- system.file("extdata", "ChatExport_2024-03-17/messages.html", package="telegramR")
+html2df(chatExport)
 ```
 
-The function has the parameter `recursive = TRUE` as default, so it is possible to recursively find HTML files in folders inside another folders. If you don't want it, use the parameter ` recursive = FALSE` 
+To get all messages from HTML in a master folder (usually `/Downloads/Telegram Desktop/`) and transform all in one single tibble, use `dir2df`. The function has the parameter `recursive = TRUE` as default, so it is possible to recursively find HTML files in folders inside another folders. 
+It allows the user to organize its chats/channels per name in folders and subfolders.
+
+```{r, eval=FALSE}
+dirTelegram <- "~/Downloads/Telegram Desktop/"
+dir2df(dirTelegram)
+```
+
+```{r, echo=FALSE, eval=TRUE}
+dirTelegram <- system.file("extdata", package="telegramR")
+dirTelegramDF <- dir2df(dirTelegram)
+dirTelegramDF
+```
 
 ```{r}
-dir2df("~/Downloads/Telegram Desktop/")
+# Counting the messages per chat_name:
+dplyr::count(dirTelegramDF, Chat_Name)
+```
+
+If you don't want it, use the parameter ` recursive = FALSE`. 
+
+```{r dir2df}
+dir2df(dirTelegram, recursive = FALSE)
 ```
 
 
@@ -89,3 +108,4 @@ In this way, if you want to export again the same chat, it is easy to know the l
 filter_last_export(info_all_tm_chats)
 ```
 
+But pay attention that if you export the same chat/channel at least twice, and with a time gap between them, the function `filter_last_export` will not identify this gap.
