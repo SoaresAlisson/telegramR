@@ -13,6 +13,6 @@ F <- glue::glue
 #' @param ic BOOLEAN. ignore case. Default = TRUE
 #' @examples
 #' "foo foo FOO bar bar" |> gsub2("foo", "fool")
-gsub2 <- function(text, arg1, subs2, ic = T){
+gsub2 <- function(text, arg1, subs2, ic = TRUE) {
   gsub(arg1, subs2, text, ignore.case = ic)
 }

@@ -4,7 +4,7 @@
 \alias{gsub2}
 \title{wrapper around gsub(). For Internal usage.}
 \usage{
-gsub2(text, arg1, subs2, ic = T)
+gsub2(text, arg1, subs2, ic = TRUE)
 }
 \arguments{
 \item{text}{CHAR. the text to be substituted}

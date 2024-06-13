@@ -20,8 +20,8 @@ LazyData: true
 RoxygenNote: 7.3.1
 Collate:
     'imports.R'
-    'telegramR-package.R'
     'general.R'
+    'telegramR-package.R'
     'tm_info.R'
     'telegram2DF.R'
 Suggests: 

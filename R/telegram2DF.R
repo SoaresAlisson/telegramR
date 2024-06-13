@@ -31,7 +31,7 @@ html2df <- function(html_file){
   )
   post.dataHora <- rvest::html_element(posts, ".date") |> rvest::html_attr("title") |> lubridate::dmy_hms()
 
-   tibble::tibble(
+  tibbleTM <- tibble::tibble(
       Chat_Name = ChatName,
       msg_Id = msgId,
       date_time = post.dataHora,
@@ -45,9 +45,10 @@ html2df <- function(html_file){
       user_name = post.nome |> as.character(),
       text = post.text |> as.character(),
       Audio_Video_image = post.audioVideoImg |> as.character()
-    ) %>%
+    )
      #filter( is.na(user_name)) %>%
-    return()
+
+    return(tibbleTM)
   }
 
 
@@ -62,6 +63,7 @@ html2df <- function(html_file){
 #' dir2df( "~/Downloads/Telegram Desktop/ChatExport_2023-12-16 (1)" )
 dir2df <- function(folder, recursive = TRUE){
   allfiles <- list.files(folder, pattern = "html$", full.names = TRUE, recursive = recursive)
-  lapply(allfiles, html2df) |> dplyr::bind_rows() %>%
-    return()
+  binded_rows <- lapply(allfiles, html2df) |> dplyr::bind_rows()
+
+  return(binded_rows)
 }

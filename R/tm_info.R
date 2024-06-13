@@ -21,6 +21,7 @@ get_data <- function(file){
 
   #df2 <- data.frame(HTMLName = file , name, UserPics = userpic, FirstDate, LastDate)
   df2 <- tibble::tibble(HTMLName = file , name, UserPics = userpic, FirstDate, LastDate)
+
   return(df2)
 }
 
@@ -30,17 +31,21 @@ get_data <- function(file){
 #'
 #' @param folders CHAR. a folder or vector of folders with telegram exported HTML files
 #' @export
+#' @example
+#' tm_info("path/to/folder/")
 #'
 tm_info <- function(folders){
-# creating an empty data frame
-#df <- data.frame(HTMLName=character(),
-# DF <- tibble::tibble(HTMLName=character(),
-#                  name=character(),
-#                  UserPics=character(),
-#                  FirstDate=as.Date(character()), LastDate=as.Date(character()))
+
 DF <- tibble::tibble()
 
 		for (i_folder in folders){
+		  #  i_folder = "~/Documentos/Programação/data/politica/poder360/ChatExport_2024-05-08_poder360"
+		  # if the path did not contain the final bar
+		  if(!grepl("\\/$", i_folder)) i_folder <- paste0(i_folder, "/")
+      if (! file.exists(i_folder)) {
+        paste("The folder/path did not exists:", i_folder) |> stop()
+        }
+
 		  HTMLFiles <- list.files(i_folder, pattern = "*.html", recursive = T)
 		  temp_file_name <- paste0(i_folder, HTMLFiles)
   			  for (i_file in temp_file_name){
@@ -48,6 +53,7 @@ DF <- tibble::tibble()
   			  }
 		  DF <- dplyr::arrange(DF, name, FirstDate)
 		}
+
 		return(DF)
 }
 
