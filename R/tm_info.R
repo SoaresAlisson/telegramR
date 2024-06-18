@@ -60,12 +60,22 @@ DF <- tibble::tibble()
 
 #' filter dataframe to show only the last exports of each chat/group
 #'
-#' @param DF the tibble/dataframe generated with `tm_info()` function
+#' @param DF the tibble/dataframe generated with `tm_info()` or `dir2df()` functions
 #'
 #' @export
 #' @examples
 #' tm_info("~/Downloads/Telegram Desktop/") |> filter_last_export()
 filter_last_export <- function(DF){
-  DF |> dplyr::group_by(name) |>
-    dplyr::summarise(LastDate = max(LastDate))
+  testColumnName <- names(DF) %in% "Chat_Name" |> any()
+
+  if (testColumnName) {
+    # if from dir2df
+    DF |> dplyr::group_by(Chat_Name) |>
+      subset(!is.na(date_time)) |>
+      dplyr::summarise(LastDate = last(date_time))
+  } else{
+    # if from tm_info()
+    DF |> dplyr::group_by(name) |>
+      dplyr::summarise(LastDate = max(LastDate))
+  }
 }

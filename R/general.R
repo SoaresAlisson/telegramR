@@ -16,3 +16,9 @@ F <- glue::glue
 gsub2 <- function(text, arg1, subs2, ic = TRUE) {
   gsub(arg1, subs2, text, ignore.case = ic)
 }
+
+#' rename folder according to chat/channel name
+#' in implementation
+rename_folder <- function(path){
+  list.files(path) |> tm_info()
+}
